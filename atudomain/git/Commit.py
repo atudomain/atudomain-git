@@ -1,0 +1,104 @@
+import datetime
+
+from typing import List
+
+
+class Commit:
+    def __init__(
+            self,
+            is_merge: bool,
+            commit_id: str,
+            tree: str,
+            parents: List[str],
+            author: str,
+            author_email: str,
+            author_date: datetime.datetime,
+            committer: str,
+            committer_email: str,
+            committer_date: datetime.datetime,
+            message: str,
+            message_subject: str,
+            message_body: str
+    ):
+        self._is_merge = is_merge
+        self._commit_id = commit_id
+        self._tree = tree
+        self._parents = parents
+        self._author = author
+        self._author_email = author_email
+        self._author_date = author_date
+        self._committer = committer
+        self._committer_email = committer_email
+        self._committer_date = committer_date
+        self._message = message
+        self._message_subject = message_subject
+        self._message_body = message_body
+
+    @property
+    def is_merge(self) -> bool:
+        return self._is_merge
+
+    @property
+    def commit_id(self) -> str:
+        return self._commit_id
+
+    @property
+    def tree(self) -> str:
+        return self._tree
+
+    @property
+    def parents(self) -> List[str]:
+        return self._parents
+
+    @property
+    def author(self) -> str:
+        return self._author
+
+    @property
+    def author_email(self) -> str:
+        return self._author_email
+
+    @property
+    def author_date(self) -> datetime.datetime:
+        return self._author_date
+
+    def get_author_date_string(
+            self,
+            date_format='%Y-%m-%d %H:%M:%S %z'
+    ) -> str:
+        return self._author_date.strftime(
+            date_format
+        )
+
+    @property
+    def committer(self) -> str:
+        return self._committer
+
+    @property
+    def committer_email(self) -> str:
+        return self._committer
+
+    @property
+    def committer_date(self) -> datetime.datetime:
+        return self._committer_date
+
+    def get_committer_date_string(
+            self,
+            date_format='%Y-%m-%d %H:%M:%S %z'
+    ) -> str:
+        return self._committer_date.strftime(
+            date_format
+        )
+
+    @property
+    def message(self) -> str:
+        return self._message
+
+    @property
+    def message_subject(self) -> str:
+        return self._message_subject
+
+    @property
+    def message_body(self) -> str:
+        return self._message_body
+
