@@ -88,7 +88,10 @@ class GitLogParser:
     def _split_message(
             message: str
     ) -> List[str]:
-        return [x.lstrip() for x in message.split('\n', 1)]
+        split = [x.lstrip() for x in message.split('\n', 1)]
+        if len(split) < 2:
+            split.append('')
+        return split
 
     def extract_commits(
             self,

@@ -97,7 +97,7 @@ class Git:
 
     def get_commits(
             self,
-            revision_range: str
+            revision_range=''
     ) -> List[Commit]:
         return self._git_log_parser.extract_commits(
             self.run(
