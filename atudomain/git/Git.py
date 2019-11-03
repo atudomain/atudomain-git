@@ -7,7 +7,7 @@ import subprocess
 from typing import List
 from shutil import which
 from atudomain.git.exceptions.GitBinaryNotFoundError import GitBinaryNotFoundError
-from atudomain.git.GitLogParser import GitLogParser
+from atudomain.git.parsers.GitLogParser import GitLogParser
 from atudomain.git.exceptions.NotARepositoryError import NotARepositoryError
 
 
@@ -95,7 +95,7 @@ class Git:
             self,
             revision_range: str
     ):
-        return self._git_log_parser.parse_commits(
+        return self._git_log_parser.extract_commits(
             self.run(
                 'log {revision_range} --pretty=raw'.format(
                     revision_range=revision_range
