@@ -6,7 +6,10 @@ import subprocess
 
 from typing import List
 from shutil import which
+
+from atudomain.git.Commit import Commit
 from atudomain.git.exceptions.GitBinaryNotFoundError import GitBinaryNotFoundError
+from atudomain.git.parsers.GitBranchParser import GitBranchParser
 from atudomain.git.parsers.GitLogParser import GitLogParser
 from atudomain.git.exceptions.NotARepositoryError import NotARepositoryError
 
@@ -32,6 +35,7 @@ class Git:
             directory=directory
         )
         self._git_log_parser = GitLogParser()
+        self._git_branch_parser = GitBranchParser()
 
     def _build_binary_path_list(
             self,
@@ -94,7 +98,7 @@ class Git:
     def get_commits(
             self,
             revision_range: str
-    ):
+    ) -> List[Commit]:
         return self._git_log_parser.extract_commits(
             self.run(
                 'log {revision_range} --pretty=raw'.format(
@@ -102,3 +106,18 @@ class Git:
                 )
             ).stdout
         )
+
+    def get_branches(
+            self,
+            include=None,
+            exclude=None
+    ) -> List[str]:
+        branches = self._git_branch_parser.extract_branches(
+            self.run('branch --all').stdout
+        )
+        if include is not None:
+            branches = [x for x in branches if re.search(include, x)]
+        if exclude is not None:
+            branches = [x for x in branches if not re.search(exclude, x)]
+        return branches
+
