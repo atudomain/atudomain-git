@@ -1,7 +1,8 @@
 # Python GIT Library
 
 - License: BSD
-- Requires: Python 3.5+
+- Pythons: Python 3.5+
+- Platforms: Linux
 ##
 This library is Just What You Need when working with git repositories from Python.
 It is simple, but extremely flexible.

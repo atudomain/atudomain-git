@@ -2,25 +2,18 @@ import os
 import unittest
 
 from atudomain.git.parsers.GitBranchParser import GitBranchParser
+from tests.ResourceReader import ResourceReader
 
 
 class GitBranchParserTest(unittest.TestCase):
-    SCRIPT_DIR = os.path.dirname(os.path.realpath('__file__'))
+    RESOURCES_DIR = os.path.dirname(os.path.realpath('__file__')) + '/resources/test_GitBranchParser/'
 
     def setUp(self) -> None:
         self.git_branch_parser = GitBranchParser()
 
-    @staticmethod
-    def read_branches_string(
-            file: str
-    ) -> str:
-        with open(file, 'r') as f:
-            branches_string = f.read()
-        return branches_string
-
-    def test_extract_branch_strings(self):
-        branches_string_1 = self.read_branches_string(
-            file=self.SCRIPT_DIR + '/resources/test__extract_branch_strings_1.txt'
+    def test_extract_branch_strings(self) -> None:
+        branches_string_1 = ResourceReader.read(
+            file=self.RESOURCES_DIR + 'test__extract_branch_strings_1.txt'
         )
 
         branch_strings_1 = self.git_branch_parser._extract_branch_strings(
@@ -37,9 +30,9 @@ class GitBranchParserTest(unittest.TestCase):
             branch_strings_1
         )
 
-    def test_extract_branches(self):
-        branches_string_1 = self.read_branches_string(
-            file=self.SCRIPT_DIR + '/resources/test_extract_branches_1.txt'
+    def test_extract_branches(self) -> None:
+        branches_string_1 = ResourceReader.read(
+            file=self.RESOURCES_DIR + 'test_extract_branches_1.txt'
         )
         branches = self.git_branch_parser.extract_branches(
             branches_string=branches_string_1

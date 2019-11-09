@@ -17,6 +17,7 @@ from atudomain.git.exceptions.NotARepositoryError import NotARepositoryError
 class Git:
     """
     Depends on python 3.5+.
+    Tested on Linux.
     """
     COMMON_BINARY_PATHS = [
         '/bin',

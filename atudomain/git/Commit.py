@@ -102,3 +102,25 @@ class Commit:
     def message_body(self) -> str:
         return self._message_body
 
+    def __eq__(self, other) -> bool:
+        if isinstance(other, self.__class__):
+            for attribute in [x for x in dir(self) if not x.startswith('__')]:
+                if not hasattr(other, attribute):
+                    return False
+                else:
+                    other_attr = getattr(other, attribute)
+                    self_attr = getattr(self, attribute)
+                    if callable(self_attr):
+                        if not callable(other_attr):
+                            return False
+                        elif self_attr() != other_attr():
+                            return False
+                    else:
+                        if self_attr != other_attr:
+                            return False
+            return True
+        else:
+            raise NotImplementedError()
+
+    def __ne__(self, other) -> bool:
+        return not self == other
