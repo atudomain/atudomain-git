@@ -29,10 +29,12 @@ class Git:
             directory: str,
             binary_path=''
     ):
-        self._binary_path_list = self._build_binary_path_list(
+        self._binary_path_list = None
+        self._build_binary_path_list(
             binary_path=binary_path
         )
-        self._directory = self._build_directory(
+        self._directory = None
+        self._build_directory(
             directory=directory
         )
         self._git_log_parser = GitLogParser()
@@ -41,7 +43,7 @@ class Git:
     def _build_binary_path_list(
             self,
             binary_path: str
-    ) -> List[str]:
+    ) -> None:
         binary_path_list = self.COMMON_BINARY_PATHS
         if binary_path:
             if not os.path.isdir(binary_path):
@@ -62,17 +64,17 @@ class Git:
                 raise GitBinaryNotFoundError()
             else:
                 print("WARNING: git binary depends on current environment variables!")
-        return binary_path_list
+        self._binary_path_list = binary_path_list
 
-    @staticmethod
     def _build_directory(
+            self,
             directory: str
-    ) -> str:
+    ) -> None:
         if directory != '/':
             directory = directory.rstrip('/')
-        if not os.path.isdir(directory + '/.git'):
+        self._directory = directory
+        if self.run('rev-parse --git-dir', check=False).returncode != 0:
             raise NotARepositoryError(directory)
-        return directory
 
     def run(
             self,

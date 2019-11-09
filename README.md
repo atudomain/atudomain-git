@@ -3,6 +3,7 @@
 - License: 3-Clause BSD
 - Pythons: Python 3.5+
 - Platforms: Linux
+- Git: 2.20+
 ##
 This library is Just What You Need when working with git repositories from Python.
 It is simple, but extremely flexible.
