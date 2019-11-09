@@ -82,4 +82,4 @@ result = git.run('status -s').stdout
 ```
 
 ## API Documentation
-https://python-git.readthedocs.io/en/latest/
+https://atudomain-python-git.readthedocs.io/en/latest/
