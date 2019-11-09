@@ -110,12 +110,9 @@ class Commit:
                 else:
                     other_attr = getattr(other, attribute)
                     self_attr = getattr(self, attribute)
-                    if callable(self_attr):
-                        if not callable(other_attr):
+                    if not callable(self_attr):
+                        if callable(other_attr):
                             return False
-                        elif self_attr() != other_attr():
-                            return False
-                    else:
                         if self_attr != other_attr:
                             return False
             return True
