@@ -4,6 +4,10 @@ from typing import List
 
 
 class Commit:
+    """
+    Represents git repository commit as extracted from git log --pretty=raw.
+    Stores data as properties and has additional methods for getting dates as strings.
+    """
     def __init__(
             self,
             is_merge: bool,
@@ -62,14 +66,6 @@ class Commit:
     def author_date(self) -> datetime.datetime:
         return self._author_date
 
-    def get_author_date_string(
-            self,
-            date_format='%Y-%m-%d %H:%M:%S %z'
-    ) -> str:
-        return self._author_date.strftime(
-            date_format
-        )
-
     @property
     def committer(self) -> str:
         return self._committer
@@ -82,14 +78,6 @@ class Commit:
     def committer_date(self) -> datetime.datetime:
         return self._committer_date
 
-    def get_committer_date_string(
-            self,
-            date_format='%Y-%m-%d %H:%M:%S %z'
-    ) -> str:
-        return self._committer_date.strftime(
-            date_format
-        )
-
     @property
     def message(self) -> str:
         return self._message
@@ -101,6 +89,38 @@ class Commit:
     @property
     def message_body(self) -> str:
         return self._message_body
+
+    def get_author_date_string(
+            self,
+            date_format='%Y-%m-%d %H:%M:%S %z'
+    ) -> str:
+        """
+        Converts stored datetime author_date to UTC+0 string date.
+
+        :param date_format: Optional date format as for datetime.strftime method.
+        :type date_format: str
+        :return: Converted date.
+        :rtype: str
+        """
+        return self._author_date.strftime(
+            date_format
+        )
+
+    def get_committer_date_string(
+            self,
+            date_format='%Y-%m-%d %H:%M:%S %z'
+    ) -> str:
+        """
+        Converts stored datetime committer_date to UTC+0 string date.
+
+        :param date_format: Optional date format as for datetime.strftime method.
+        :type date_format: str
+        :return: Converted date.
+        :rtype: str
+        """
+        return self._committer_date.strftime(
+            date_format
+        )
 
     def __eq__(self, other) -> bool:
         if isinstance(other, self.__class__):
