@@ -81,4 +81,4 @@ result = git.run('status -s').stdout
 ```
 
 ## API Documentation
-TODO link
+https://python-git.readthedocs.io/en/latest/
