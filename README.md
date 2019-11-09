@@ -1,6 +1,6 @@
 # Python GIT Library
 
-- License: BSD
+- License: 3-Clause BSD
 - Pythons: Python 3.5+
 - Platforms: Linux
 ##
