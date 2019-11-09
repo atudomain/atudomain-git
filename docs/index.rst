@@ -3,8 +3,9 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-python-git's API documentation
-==============================
+atudomain-python-git's API documentation
+========================================
+Link: https://github.com/atudomain/atudomain-python-git
 
 .. toctree::
 

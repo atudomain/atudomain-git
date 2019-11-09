@@ -21,7 +21,7 @@ sys.path.insert(0, os.path.abspath('..'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'python-git'
+project = 'atudomain-python-git'
 copyright = '2019, Adrian Tuzimek'
 author = 'Adrian Tuzimek'
 
