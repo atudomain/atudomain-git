@@ -12,6 +12,14 @@ Provides Commit objects and easy branch inspection.
 
 Git.run() method returns subprocess.run() results, but takes git command as string argument.
 
+## Table of Contents
+- [Installation](#installation)
+- [Quickstart](#quickstart)
+    - [Getting Branches](#getting-branches)
+    - [Getting Commits](#getting-commits)
+    - [Getting Commit details](#getting-commit-details)
+    - [Executing commands in repository](#executing-commands-in-repository)
+    
 ## Installation
 
 Append downloaded repository path to PYTHONPATH.
