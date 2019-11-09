@@ -12,7 +12,7 @@ Provides Commit objects and easy branch inspection.
 
 Git.run() method returns subprocess.run() results, but takes git command as string argument.
 
-## Setup
+## Installation
 
 Append downloaded repository path to PYTHONPATH.
 
