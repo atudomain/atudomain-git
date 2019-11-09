@@ -19,7 +19,8 @@ Git.run() method returns subprocess.run() results, but takes git command as stri
     - [Getting Commits](#getting-commits)
     - [Getting Commit details](#getting-commit-details)
     - [Executing commands in repository](#executing-commands-in-repository)
-    
+- [API Documentation](#api-documentation)
+
 ## Installation
 
 Append downloaded repository path to PYTHONPATH.
