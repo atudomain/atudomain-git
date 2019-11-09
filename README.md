@@ -80,3 +80,5 @@ Get 'git status -s' output as a string:
 result = git.run('status -s').stdout
 ```
 
+## API Documentation
+TODO link

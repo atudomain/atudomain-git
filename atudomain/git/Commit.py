@@ -5,7 +5,7 @@ from typing import List
 
 class Commit:
     """
-    Represents git repository commit as extracted from git log --pretty=raw.
+    Represents git repository commit as extracted from 'git log --pretty=raw'.
     Stores data as properties and has additional methods for getting dates as strings.
     """
     def __init__(
