@@ -27,6 +27,7 @@ Create Git object:
 git = Git('/home/user/example-repo')
 ```
 
+### Getting branches
 Get list of remote origin branches:
 ```python
 branches = git.get_branches(include='^remotes/origin')
@@ -37,6 +38,7 @@ Get list of local branches:
 branches = git.get_branches(exclude='^remotes/')
 ```
 
+### Getting Commits
 Get list of Commits for the current branch:
 ```python
 commits = git.get_commits()
@@ -47,6 +49,7 @@ Get list with last Commit for the current branch:
 commits = git.get_commits('HEAD^..HEAD')
 ```
 
+### Getting Commit details
 Get committer date from Commit:
 ```python
 committer_date = commits[0].committer_date
@@ -62,6 +65,7 @@ Check if Commit is a merge:
 is_merge = commits[0].is_merge
 ```
 
+### Executing commands in repository
 Get 'git status -s' output as a string:
 ```python
 result = git.run('status -s').stdout
