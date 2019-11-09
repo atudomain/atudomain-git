@@ -40,54 +40,93 @@ class Commit:
 
     @property
     def is_merge(self) -> bool:
+        """
+        :rtype: bool
+        """
         return self._is_merge
 
     @property
     def commit_id(self) -> str:
+        """
+        :rtype: str
+        """
         return self._commit_id
 
     @property
     def tree(self) -> str:
+        """
+        :rtype: str
+        """
         return self._tree
 
     @property
     def parents(self) -> List[str]:
+        """
+        :rtype: List[str]
+        """
         return self._parents
 
     @property
     def author(self) -> str:
+        """
+        :rtype: str
+        """
         return self._author
 
     @property
     def author_email(self) -> str:
+        """
+        :rtype: str
+        """
         return self._author_email
 
     @property
     def author_date(self) -> datetime.datetime:
+        """
+        :rtype: datetime.datetime
+        """
         return self._author_date
 
     @property
     def committer(self) -> str:
+        """
+        :rtype: str
+        """
         return self._committer
 
     @property
     def committer_email(self) -> str:
+        """
+        :rtype: str
+        """
         return self._committer
 
     @property
     def committer_date(self) -> datetime.datetime:
+        """
+        :rtype: datetime.datetime
+        """
         return self._committer_date
 
     @property
     def message(self) -> str:
+        """
+        :rtype: str
+        """
         return self._message
 
     @property
     def message_subject(self) -> str:
+        """
+        :rtype: str
+        """
         return self._message_subject
 
     @property
     def message_body(self) -> str:
+        """
+        :rtype: str
+        """
         return self._message_body
 
     def get_author_date_string(
