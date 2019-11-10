@@ -23,7 +23,12 @@ Git.run() method returns subprocess.run() results, but takes git command as stri
 
 ## Installation
 
-Append downloaded repository path to PYTHONPATH.
+Install using pip:
+```bash
+python3 -m pip install atudomain-git --user 
+```
+
+Otherwise, just can just append downloaded repository path to PYTHONPATH.
 
 ## Quickstart
 
