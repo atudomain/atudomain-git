@@ -9,6 +9,7 @@ from shutil import which
 
 from atudomain.git.Commit import Commit
 from atudomain.git.exceptions.GitBinaryNotFoundError import GitBinaryNotFoundError
+from atudomain.git.exceptions.UnclosedQuoteError import UnclosedQuoteError
 from atudomain.git.parsers.GitBranchParser import GitBranchParser
 from atudomain.git.parsers.GitLogParser import GitLogParser
 from atudomain.git.exceptions.NotARepositoryError import NotARepositoryError
@@ -76,6 +77,43 @@ class Git:
         if self.run('rev-parse --git-dir', check=False).returncode != 0:
             raise NotARepositoryError(directory)
 
+    @staticmethod
+    def _convert_to_subprocess_list(
+            command: str
+    ) -> List[str]:
+        """
+        This method was necessary to allow quoting whitespace and other symbols in git commands.
+
+        :param command: String command passed to run() method.
+        :type command: str
+        :return: List of strings for subprocess.run().
+        :rtype: List[str]
+        """
+        last_quote = None
+        command_list = list()
+        list_element = ''
+        for symbol in command:
+            if re.match(r'(\'|\")', symbol) and not last_quote:
+                last_quote = re.match(r'(\'|\")', symbol).group(1)
+                continue
+            if re.match(r'(\'|\")', symbol) \
+                    and last_quote \
+                    and re.match(r'(\'|\")', symbol).group(1) == last_quote:
+                last_quote = None
+                continue
+            if last_quote:
+                list_element += symbol
+            else:
+                if re.match(r'\s', symbol):
+                    command_list.append(list_element)
+                    list_element = ''
+                else:
+                    list_element += symbol
+        if last_quote:
+            raise UnclosedQuoteError(command)
+        command_list.append(list_element)
+        return [x for x in command_list if x]
+
     def run(
             self,
             command: str,
@@ -91,14 +129,16 @@ class Git:
         :return: Result of subprocess.run() execution.
         :rtype: subprocess.CompletedProcess
         """
-        command = re.split(r'\s+', command.strip())
+        command_list = self._convert_to_subprocess_list(
+            command=command
+        )
         try:
             return subprocess.run(
                 [
                     'git',
                     '-C',
                     self._directory
-                ] + command,
+                ] + command_list,
                 check=check,
                 capture_output=True,
                 universal_newlines=True,

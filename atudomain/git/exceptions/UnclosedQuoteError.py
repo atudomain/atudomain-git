@@ -1,0 +1,2 @@
+class UnclosedQuoteError(Exception):
+    pass
