@@ -19,6 +19,11 @@ class Git:
     """
     Represents git repository. Can be used to extract Commits and examine branches.
     It can also be used to conveniently run git commands and get their output.
+
+    :param directory: Path to git repository or bare repository.
+    :type directory: str
+    :param binary_path: Path to directory with git binary.
+    :type binary_path: str
     """
     COMMON_BINARY_PATHS = [
         '/bin',
