@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="atudomain-git",
-    version="1.1.0",
+    version="1.2.0",
     author="Adrian Tuzimek",
     author_email="tuziomek@gmail.com",
     description="Convenience library for working with Git on Linux. Requires git >= 2.20",

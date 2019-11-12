@@ -19,5 +19,6 @@ class GitBranchParser:
             x.strip().replace('* ', '')
             for x in branch_strings
             if not re.search(r'\s->\s', x)
+            and not re.search(r'HEAD detached', x)
         ]
         return branches
