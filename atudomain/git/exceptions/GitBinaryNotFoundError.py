@@ -1,2 +1,0 @@
-class GitBinaryNotFoundError(Exception):
-    pass
