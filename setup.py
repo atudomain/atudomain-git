@@ -5,10 +5,10 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="atudomain-git",
-    version="2.0.0",
+    version="2.0.1",
     author="Adrian Tuzimek",
     author_email="tuziomek@gmail.com",
-    description="Convenience library for working with Git on Linux. Requires git >= 2.20",
+    description="Convenience library for working with Git on Linux. Requires git >= 2.18.4",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/atudomain/atudomain-python-git",

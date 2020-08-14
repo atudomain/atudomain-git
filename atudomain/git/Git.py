@@ -69,7 +69,8 @@ class Git:
             return subprocess.run(
                 'git -C ' + self._directory + ' ' + command,
                 check=check,
-                capture_output=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
                 universal_newlines=True,
                 shell=True,
                 env=env
