@@ -5,10 +5,10 @@
 - Platforms: Linux
 - Git: 2.18.4+
 ##
-This library is Just What You Need when working with git repositories from Python.
+This library is Just What You Need when working with git repositories from Python as devops or linux administrator.
 It is simple, but extremely flexible.
 
-Provides Commit objects and easy branch inspection.
+Provides Commit objects and easy branch listing.
 
 Git.run() method returns subprocess.run() results, but takes git command as string argument.
 
