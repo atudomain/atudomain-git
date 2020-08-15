@@ -12,6 +12,8 @@ Provides Commit objects and easy branch listing.
 
 Git.run() method returns subprocess.run() results, but takes git command as string argument.
 
+Nothing stops you from piping inside Git.run().
+
 ## Table of Contents
 - [Installation](#installation)
 - [Quickstart](#quickstart)
@@ -84,6 +86,11 @@ is_merge = commits[0].is_merge
 Get 'git status -s' output as a string:
 ```python
 result = git.run('status -s').stdout
+```
+
+Get returncode of 'git status -s' piped to grep:
+```python
+result = git.run('status -s | grep Dockerfile').returncode
 ```
 
 ## API Documentation
