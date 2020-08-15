@@ -28,7 +28,7 @@ Install using pip:
 python3 -m pip install atudomain-git --user 
 ```
 
-Otherwise, just can just append downloaded repository path to PYTHONPATH.
+Otherwise, you can just append downloaded repository path to PYTHONPATH.
 
 ## Quickstart
 
