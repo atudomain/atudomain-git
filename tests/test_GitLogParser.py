@@ -4,7 +4,7 @@ import unittest
 
 from atudomain.git.Commit import Commit
 from atudomain.git.parsers.GitLogParser import GitLogParser
-from tests.ResourceReader import ResourceReader
+from ResourceReader import ResourceReader
 
 
 class GitLogParserTest(unittest.TestCase):
