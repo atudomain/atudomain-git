@@ -2,7 +2,7 @@ import os
 import unittest
 
 from atudomain.git.parsers.GitBranchParser import GitBranchParser
-from tests.ResourceReader import ResourceReader
+from ResourceReader import ResourceReader
 
 
 class GitBranchParserTest(unittest.TestCase):
