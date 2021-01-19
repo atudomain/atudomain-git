@@ -49,25 +49,16 @@ docs:
 	$(PREFIX)python3 setup.py build_sphinx
 
 release-patch:
-	bumpversion --tag patch
-	git add setup.cfg
-	git commit --amend --no-edit
-	git push origin master
-	git push --tags
+	bumpversion patch
+	git push origin master --follow-tags
 
 release-minor:
-	bumpversion --tag minor
-	git add setup.cfg
-	git commit --amend --no-edit
-	git push origin master
-	git push --tags
+	bumpversion minor
+	git push origin master --follow-tags
 
 release-major:
-	bumpversion --tag major
-	git add setup.cfg
-	git commit --amend --no-edit
-	git push origin master
-	git push --tags
+	bumpversion major
+	git push origin master --follow-tags
 
 upload:
 	rm -f dist/*
