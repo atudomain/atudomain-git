@@ -1,18 +1,10 @@
-# Python GIT Library
+# Simple Python GIT Library for Linux
+
+Provides access to Commit objects and easy branch listing.
 
 - License: 3-Clause BSD
-- Pythons: Python 3.5+
+- Python: Python 3.5+
 - Platforms: Linux
-- Git: 2.18.4+
-##
-This library is Just What You Need when working with git repositories from Python as devops or linux administrator.
-It is simple, but flexible.
-
-Provides Commit objects and easy branch listing.
-
-Git.run() method returns subprocess.run() results, but takes git command as string argument.
-
-Nothing stops you from piping inside Git.run().
 
 ## Table of Contents
 - [Installation](#installation)
@@ -30,7 +22,7 @@ Install using pip:
 python3 -m pip install atudomain-git --user 
 ```
 
-Otherwise, you can just append downloaded repository path to PYTHONPATH.
+Alternatively, you can just append downloaded repository path to PYTHONPATH.
 
 ## Quickstart
 
@@ -80,17 +72,6 @@ commit_id = commits[0].commit_id
 Check if Commit is a merge:
 ```python
 is_merge = commits[0].is_merge
-```
-
-### Executing commands in repository
-Get 'git status -s' output as a string:
-```python
-result = git.run('status -s').stdout
-```
-
-Get returncode of 'git status -s' piped to grep:
-```python
-result = git.run('status -s | grep Dockerfile').returncode
 ```
 
 ## API Documentation

@@ -41,10 +41,10 @@ class Git:
         if directory != '/':
             directory = directory.rstrip('/')
         self._directory = directory
-        if self.run('rev-parse --git-dir', check=False).returncode != 0:
+        if self._run('rev-parse --git-dir', check=False).returncode != 0:
             raise NotARepositoryError(directory)
 
-    def run(
+    def _run(
             self,
             command: str,
             check=True
@@ -93,7 +93,7 @@ class Git:
         :rtype: List[Commit]
         """
         return self._git_log_parser.extract_commits(
-            self.run(
+            self._run(
                 'log {revision_range} --pretty=raw'.format(
                     revision_range=revision_range
                 )
@@ -117,7 +117,7 @@ class Git:
         :rtype: List[str]
         """
         branches = self._git_branch_parser.extract_branches(
-            self.run('branch --all').stdout
+            self._run('branch --all').stdout
         )
         if include is not None:
             branches = [x for x in branches if re.search(include, x)]
