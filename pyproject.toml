@@ -2,6 +2,6 @@
 requires = [
     "setuptools",
     "wheel",
-    "bump2version
+    "bump2version"
 ]
 build-backend = "setuptools.build_meta"
