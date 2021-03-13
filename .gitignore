@@ -1,8 +1,8 @@
 *.pyc
-.idea/*
+.idea*
 docs/build
-dist/*
-build/*
+dist*
+build*
 *.egg-info
 *.eggs
 venv
