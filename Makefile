@@ -26,7 +26,7 @@ info:
 
 clean:
 	@find . -name "*.pyc" -delete
-	@rm -rf dist docs/build build atudomain_git.egg-info
+	@rm -rf dist docs/build build atudomain_git.egg-info .eggs .pytest_cache
 
 package:
 	python3 setup.py sdist bdist_wheel build_sphinx
