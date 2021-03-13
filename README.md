@@ -1,5 +1,5 @@
 # Simple Python GIT Library for Linux
-[![pipeline](https://gitlab.com/atudomain/atudomain-python-git/badges/master/pipeline.svg)](https://gitlab.com/atudomain/atudomain-python-git/-/tree/master)
+[![pipeline](https://gitlab.com/atudomain/atudomain-git/badges/master/pipeline.svg)](https://gitlab.com/atudomain/atudomain-git/-/tree/master)
 
 Provides access to Commit objects and easy branch listing.
 
@@ -76,4 +76,4 @@ is_merge = commits[0].is_merge
 ```
 
 ## API Documentation
-https://atudomain-python-git.readthedocs.io/en/latest/
+https://atudomain-git.readthedocs.io/en/latest/
