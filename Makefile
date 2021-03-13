@@ -42,7 +42,7 @@ dist:
 
 test:
 	@echo "INFO:	test"
-	cd atudomain/git/tests && $(PREFIX)python3 -m unittest discover -t ../../..
+	pytest
 
 docs:
 	@echo "INFO:	Building the docs"
