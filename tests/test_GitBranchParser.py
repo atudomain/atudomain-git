@@ -1,8 +1,8 @@
 import os
 import unittest
 
-from atudomain.git.parsers.GitBranchParser import GitBranchParser
-from tests.ResourceReader import ResourceReader
+from atudomain.git.parsers import GitBranchParser
+from tests.util import ResourceReader
 from tests import RESOURCES_DIR
 
 

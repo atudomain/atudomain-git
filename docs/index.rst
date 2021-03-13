@@ -9,8 +9,7 @@ Link: https://github.com/atudomain/atudomain-git
 
 .. toctree::
 
-   atudomain.git.Git
-   atudomain.git.Commit
+   atudomain.git
 
 Indices and tables
 ==================

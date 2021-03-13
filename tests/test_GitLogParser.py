@@ -2,9 +2,9 @@ import datetime
 import os
 import unittest
 
-from atudomain.git.Commit import Commit
-from atudomain.git.parsers.GitLogParser import GitLogParser
-from tests.ResourceReader import ResourceReader
+from atudomain.git.objects import Commit
+from atudomain.git.parsers import GitLogParser
+from tests.util import ResourceReader
 from tests import RESOURCES_DIR
 
 

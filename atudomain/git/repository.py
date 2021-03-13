@@ -1,14 +1,13 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 import re
 import subprocess
 
-from typing import List
+from atudomain.git.objects import Commit
+from atudomain.git.parsers import GitBranchParser
+from atudomain.git.parsers import GitLogParser
 
-from atudomain.git.Commit import Commit
-from atudomain.git.parsers.GitBranchParser import GitBranchParser
-from atudomain.git.parsers.GitLogParser import GitLogParser
-from atudomain.git.exceptions.NotARepositoryError import NotARepositoryError
+from typing import List
 
 
 class Git:
@@ -124,3 +123,7 @@ class Git:
         if exclude is not None:
             branches = [x for x in branches if not re.search(exclude, x)]
         return branches
+
+
+class NotARepositoryError(Exception):
+    pass

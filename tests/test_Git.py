@@ -1,6 +1,6 @@
 import unittest
 
-from atudomain.git.Git import Git
+from atudomain.git.repository import Git
 
 
 def test_readonly_methods() -> None:
