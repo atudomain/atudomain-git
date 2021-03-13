@@ -1,5 +1,5 @@
 # Simple Python GIT Library for Linux
-[![Pipeline Status](https://gitlab.com/atudomain/badges/master/pipeline.svg?style=svg)](https://gitlab.com/atudomain/-/commits/master)
+[![pipeline](https://gitlab.com/atudomain/atudomain-python-git/badges/master/pipeline.svg)](https://gitlab.com/atudomain/atudomain-python-git/-/tree/master)
 
 Provides access to Commit objects and easy branch listing.
 
