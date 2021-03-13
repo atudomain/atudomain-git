@@ -1,0 +1,33 @@
+image: python:latest
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+
+cache:
+  paths:
+    - .cache/pip
+    - venv/
+
+before_script:
+  - python -V
+  - pip install virtualenv
+  - virtualenv venv
+  - source venv/bin/activate
+
+test:
+  script:
+    - make test
+
+dist:
+  script:
+    - make dist
+  artifacts:
+    paths:
+      - dist/*.whl
+
+docs:
+  script:
+      - make docs
+  artifacts:
+    paths:
+      - docs/build/html
