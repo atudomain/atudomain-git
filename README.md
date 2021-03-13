@@ -29,7 +29,7 @@ Alternatively, you can just append downloaded repository path to PYTHONPATH.
 
 Import Git class:
 ```python
-from atudomain.git.Git import Git
+from atudomain.git import Git
 ```
 
 Create Git object:
