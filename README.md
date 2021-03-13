@@ -1,5 +1,6 @@
 # Simple Python GIT Library for Linux
 [![pipeline](https://gitlab.com/atudomain/atudomain-git/badges/master/pipeline.svg)](https://gitlab.com/atudomain/atudomain-git/-/tree/master)
+[![Documentation Status](https://readthedocs.org/projects/atudomain-git/badge/?version=latest)](https://atudomain-git.readthedocs.io/en/latest/?badge=latest)
 
 Provides access to Commit objects and easy branch listing.
 
