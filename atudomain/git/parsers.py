@@ -162,5 +162,7 @@ class GitLogParser:
                 message_subject=message_subject,
                 message_body=message_body
             )
+
             commits.append(commit)
+
         return commits
