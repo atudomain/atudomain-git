@@ -14,11 +14,19 @@ before_script:
   - virtualenv venv
   - source venv/bin/activate
 
+stages:
+  - test
+  - dist
+  - docs
+
 test:
+  stage: test
   script:
+    - pip install -r requirements.txt
     - make test
 
 dist:
+  stage: dist
   script:
     - make dist
   artifacts:
@@ -26,6 +34,7 @@ dist:
       - dist/*.whl
 
 docs:
+  stage: docs
   script:
       - make docs
   artifacts:

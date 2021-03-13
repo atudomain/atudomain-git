@@ -1,6 +1,5 @@
 appdirs==1.4.4
 attrs==20.3.0
-atudomain-git @ file:///home/atu/Repositories/atudomain-python-git
 distlib==0.3.1
 filelock==3.0.12
 flake8==3.8.4
