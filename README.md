@@ -5,7 +5,7 @@
 Provides access to Commit objects and easy branch listing.
 
 - License: 3-Clause BSD
-- Python: Python 3.5+
+- Python: Python 3.6+
 - Platforms: Linux
 
 ## Table of Contents
