@@ -2,9 +2,5 @@
 requires = [
     "setuptools",
     "build",
-    "wheel",
-    "bump2version",
-	"sphinx>=2.2.0",
-	"sphinx_rtd_theme>=0.4.3"
 ]
 build-backend = "setuptools.build_meta"
