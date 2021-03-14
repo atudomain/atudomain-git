@@ -39,6 +39,7 @@ class Git:
     ) -> None:
         if directory != '/':
             directory = directory.rstrip('/')
+        directory = directory.rstrip('\\')
         self._directory = directory
         if self._run('rev-parse --git-dir', check=False).returncode != 0:
             raise NotARepositoryError(directory)

@@ -13,7 +13,7 @@ git_branch_parser = GitBranchParser()
 
 def test_extract_branch_strings() -> None:
     branches_string_1 = ResourceReader.read(
-        file=f"{MODULE_RESOURCES_DIR}/test_extract_branch_strings_1.txt"
+        file=os.path.join(f"{MODULE_RESOURCES_DIR}", "test_extract_branch_strings_1.txt")
     )
     branch_strings_1 = git_branch_parser._extract_branch_strings(
         branches_string=branches_string_1

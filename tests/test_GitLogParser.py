@@ -15,7 +15,7 @@ git_log_parser = GitLogParser()
 
 def test_extract_commits() -> None:
     raw_log_string_1 = ResourceReader.read(
-        file=f"{MODULE_RESOURCES_DIR}/test_extract_commits_1.txt"
+        file=os.path.join(f"{MODULE_RESOURCES_DIR}","test_extract_commits_1.txt")
     )
 
     commits = git_log_parser.extract_commits(
