@@ -1,2 +1,2 @@
-choco install git
-choco install python3
+choco install -y git
+choco install -y python3
