@@ -10,23 +10,23 @@ from tests import SANDBOX_DIR
 
 os.makedirs(SANDBOX_DIR, exist_ok=True)
 
-def test_empty_repo():
-    repo_dir = os.path.join(SANDBOX_DIR, "repo")
+def test_empty_repo1():
+    repo_dir = os.path.join(SANDBOX_DIR, "repo1")
     if os.path.isdir(f"{repo_dir}"):
         shutil.rmtree(f"{repo_dir}")
     subprocess.run(f"git init {repo_dir}", shell=True)
-    git = Git(os.path.join(SANDBOX_DIR, "repo"))
+    git = Git(repo_dir)
     with pytest.raises(NoCommitsError):
         git.get_commits()
     git.get_branches()
     shutil.rmtree(f"{repo_dir}")
 
-def test_empty_bare_repo():
-    repo_dir = os.path.join(SANDBOX_DIR, "repo")
+def test_empty_bare_repo2():
+    repo_dir = os.path.join(SANDBOX_DIR, "repo2")
     if os.path.isdir(f"{repo_dir}"):
         shutil.rmtree(f"{repo_dir}")
     subprocess.run(f"git init {repo_dir}", shell=True)
-    git = Git(os.path.join(SANDBOX_DIR, "repo"))
+    git = Git(repo_dir)
     with pytest.raises(NoCommitsError):
         git.get_commits()
     git.get_branches()

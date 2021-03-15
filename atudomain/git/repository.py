@@ -79,7 +79,7 @@ class Git:
     def _check_for_commits(
         self
     ):
-        if self._run('git rev-parse HEAD', check=False).returncode != 0:
+        if self._run('git rev-parse HEAD', check=False).returncode == 128:
             raise NoCommitsError("Current branch has no commits yet")
 
     def get_commits(
