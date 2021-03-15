@@ -5,7 +5,8 @@ dist*
 build*
 *.egg-info
 *.eggs
-venv
+venv*
+.venv*
 .vscode*
 .pytest_cache*
 .cache*
