@@ -76,6 +76,12 @@ class Git:
             print(error.stderr)
             raise
 
+    def _check_for_commits(
+        self
+    ):
+        if self._run('git rev-parse HEAD', check=False).returncode != 0:
+            raise NoCommitsError("Current branch has no commits yet")
+
     def get_commits(
             self,
             revision_range=''
@@ -89,6 +95,7 @@ class Git:
         :return: List of Commit objects extracted.
         :rtype: List[Commit]
         """
+        self._check_for_commits()
         return self._git_log_parser.extract_commits(
             self._run(
                 'git log {revision_range} --pretty=raw'.format(
@@ -124,4 +131,7 @@ class Git:
 
 
 class NotARepositoryError(Exception):
+    pass
+
+class NoCommitsError(Exception):
     pass

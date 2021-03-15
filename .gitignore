@@ -13,3 +13,4 @@ venv*
 .python-version
 .tox*
 .vagrant*
+tests/sandbox*
