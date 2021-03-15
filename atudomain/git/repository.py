@@ -41,7 +41,7 @@ class Git:
             directory = directory.rstrip('/')
         directory = directory.rstrip('\\')
         self._directory = directory
-        if self._run('rev-parse --git-dir', check=False).returncode != 0:
+        if self._run('git rev-parse --git-dir', check=False).returncode != 0:
             raise NotARepositoryError(directory)
 
     def _run(
@@ -50,9 +50,9 @@ class Git:
             check=True
     ) -> subprocess.CompletedProcess:
         """
-        Runs git commands and gets their output.
+        Runs commands and gets their output.
 
-        :param command: Command to run without 'git' and repository location part ie. 'branch -v'.
+        :param command: Command to run.
         :type command: str
         :param check: True if exception should be raised when command return code is not 0.
         :type check: bool
@@ -67,7 +67,7 @@ class Git:
             env = {'PATH': path}
         try:
             return subprocess.run(
-                'git -C ' + self._directory + ' ' + command,
+                f"cd {self._directory} && {command}",
                 check=check,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
@@ -94,7 +94,7 @@ class Git:
         """
         return self._git_log_parser.extract_commits(
             self._run(
-                'log {revision_range} --pretty=raw'.format(
+                'git log {revision_range} --pretty=raw'.format(
                     revision_range=revision_range
                 )
             ).stdout
@@ -117,7 +117,7 @@ class Git:
         :rtype: List[str]
         """
         branches = self._git_branch_parser.extract_branches(
-            self._run('branch --all').stdout
+            self._run('git branch --all').stdout
         )
         if include is not None:
             branches = [x for x in branches if re.search(include, x)]
