@@ -77,12 +77,6 @@ class Git:
             print(error.stderr)
             raise
 
-    def _check_for_commits(
-            self
-    ):
-        if self._run(["rev-parse", "HEAD"], check=False).returncode == 128:
-            raise NoCommitsError("Current branch has no commits yet")
-
     def get_commits(
             self,
             revision_range=""
@@ -96,14 +90,14 @@ class Git:
         :return: List of Commit objects extracted.
         :rtype: List[Commit]
         """
-        self._check_for_commits()
         if revision_range:
             command = ["log", revision_range, "--pretty=raw"]
         else:
             command = ["log", "--pretty=raw"]
-        return self._git_log_parser.extract_commits(
-            self._run(command).stdout
-        )
+        completed_process = self._run(command, check=False)
+        if completed_process.returncode == 128:
+            raise NoCommitsError(completed_process.stderr)
+        return self._git_log_parser.extract_commits(completed_process.stdout)
 
     def get_branches(
             self,

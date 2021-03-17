@@ -9,41 +9,62 @@ from tests import SANDBOX_DIR
 
 
 os.makedirs(SANDBOX_DIR, exist_ok=True)
+repo_dir = os.path.join(SANDBOX_DIR, "repo")
 
 
-def test_empty_repo1():
-    repo_dir = os.path.join(SANDBOX_DIR, "repo1")
+def create_repo(is_bare=False):
     if os.path.isdir(f"{repo_dir}"):
         shutil.rmtree(f"{repo_dir}")
-    subprocess.run(f"git init {repo_dir}", shell=True)
-    git = Git(repo_dir)
-    with pytest.raises(NoCommitsError):
-        git.get_commits()
-    git.get_branches()
+    if is_bare:
+        subprocess.run(f"git init {repo_dir} --bare", shell=True)
+    else:
+        subprocess.run(f"git init {repo_dir}", shell=True)
+
+
+def remove_repo():
     shutil.rmtree(f"{repo_dir}")
 
 
-def test_empty_bare_repo2():
-    repo_dir = os.path.join(SANDBOX_DIR, "repo2")
-    if os.path.isdir(f"{repo_dir}"):
-        shutil.rmtree(f"{repo_dir}")
-    subprocess.run(f"git init {repo_dir}", shell=True)
-    git = Git(repo_dir)
-    with pytest.raises(NoCommitsError):
-        git.get_commits()
-    git.get_branches()
-    shutil.rmtree(f"{repo_dir}")
-
-
-def test_repo3():
-    repo_dir = os.path.join(SANDBOX_DIR, "repo3")
-    if os.path.isdir(f"{repo_dir}"):
-        shutil.rmtree(f"{repo_dir}")
-    subprocess.run(f"git init {repo_dir}", shell=True)
+def add_commits():
     subprocess.run(f"git echo 'test' > testfile", shell=True, cwd=repo_dir)
     subprocess.run(f"git add .", shell=True, cwd=repo_dir)
     subprocess.run(f"git commit -m 'test'", shell=True, cwd=repo_dir)
-    git = Git(repo_dir)
-    git.get_commits()
+
+
+@pytest.fixture
+def git():
+    create_repo()
+    yield Git(repo_dir)
+    remove_repo()
+
+
+@pytest.fixture
+def git_bare():
+    create_repo(is_bare=True)
+    yield Git(repo_dir)
+    remove_repo()
+
+
+@pytest.fixture
+def git_with_commits():
+    create_repo()
+    add_commits()
+    yield Git(repo_dir)
+    remove_repo()
+
+
+def test_empty_repo(git):
+    with pytest.raises(NoCommitsError):
+        git.get_commits()
     git.get_branches()
-    shutil.rmtree(f"{repo_dir}")
+
+
+def test_empty_bare_repo(git_bare):
+    with pytest.raises(NoCommitsError):
+        git_bare.get_commits()
+    git_bare.get_branches()
+
+
+def test_repo(git_with_commits):
+    git_with_commits.get_commits()
+    git_with_commits.get_branches()
