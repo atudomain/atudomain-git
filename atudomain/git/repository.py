@@ -97,10 +97,12 @@ class Git:
         :rtype: List[Commit]
         """
         self._check_for_commits()
+        if revision_range:
+            command = ["log", revision_range, "--pretty=raw"]
+        else:
+            command = ["log", "--pretty=raw"]
         return self._git_log_parser.extract_commits(
-            self._run(
-                ["log", revision_range, "--pretty=raw"]
-            ).stdout
+            self._run(command).stdout
         )
 
     def get_branches(
