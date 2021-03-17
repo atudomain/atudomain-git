@@ -28,6 +28,8 @@ def remove_repo():
 def add_commits():
     subprocess.run(f"git echo 'test' > testfile", shell=True, cwd=repo_dir)
     subprocess.run(f"git add .", shell=True, cwd=repo_dir)
+    subprocess.run(f"git config user.name Test Example", shell=True, cwd=repo_dir)
+    subprocess.run(f"git config user.email test@example.com", shell=True, cwd=repo_dir)
     subprocess.run(f"git commit -m 'test'", shell=True, cwd=repo_dir)
 
 
