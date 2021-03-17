@@ -17,15 +17,15 @@ class Git:
 
     :param directory: Path to git repository or bare repository.
     :type directory: str
-    :param binary_path: Path to directory with git binary.
-    :type binary_path: str
+    :param executable_directory: Path to directory with git binary.
+    :type executable_directory: str
     """
     def __init__(
             self,
             directory: str,
-            binary_path=""
+            executable_directory=""
     ):
-        self._binary_path = binary_path
+        self._executable_directory = executable_directory
         self._directory = None
         self._build_directory(
             directory=directory
@@ -58,8 +58,8 @@ class Git:
         """
         path = None
         env = None
-        if self._binary_path != "":
-            path = self._binary_path + ":PATH"
+        if self._executable_directory != "":
+            path = self._executable_directory + ":PATH"
         if path:
             env = {"PATH": path}
         try:
