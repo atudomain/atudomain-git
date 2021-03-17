@@ -14,3 +14,4 @@ venv*
 .tox*
 .vagrant*
 tests/sandbox*
+*.log
