@@ -23,7 +23,7 @@ class Git:
     def __init__(
             self,
             directory: str,
-            binary_path=''
+            binary_path=""
     ):
         self._binary_path = binary_path
         self._directory = None
@@ -38,19 +38,19 @@ class Git:
             directory: str
     ) -> None:
         self._directory = directory
-        if self._run('git rev-parse --git-dir', check=False).returncode != 0:
+        if self._run(["rev-parse", "--git-dir"], check=False).returncode != 0:
             raise NotARepositoryError(directory)
 
     def _run(
             self,
-            command: str,
+            command: List[str],
             check=True
     ) -> subprocess.CompletedProcess:
         """
         Runs commands and gets their output.
 
         :param command: Command to run.
-        :type command: str
+        :type command: List[str]
         :param check: True if exception should be raised when command return code is not 0.
         :type check: bool
         :return: Result of subprocess.run() execution.
@@ -58,19 +58,20 @@ class Git:
         """
         path = None
         env = None
-        if self._binary_path != '':
-            path = self._binary_path + ':PATH'
+        if self._binary_path != "":
+            path = self._binary_path + ":PATH"
         if path:
-            env = {'PATH': path}
+            env = {"PATH": path}
         try:
             return subprocess.run(
-                f"cd {self._directory} && {command}",
+                ["git"] + command,
                 check=check,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 universal_newlines=True,
-                shell=True,
-                env=env
+                shell=False,
+                env=env,
+                cwd=self._directory
             )
         except subprocess.CalledProcessError as error:
             print(error.stderr)
@@ -79,12 +80,12 @@ class Git:
     def _check_for_commits(
             self
     ):
-        if self._run('git rev-parse HEAD', check=False).returncode == 128:
+        if self._run(["rev-parse", "HEAD"], check=False).returncode == 128:
             raise NoCommitsError("Current branch has no commits yet")
 
     def get_commits(
             self,
-            revision_range=''
+            revision_range=""
     ) -> List[Commit]:
         """
         Extracts commits from git 'log --pretty=raw' command, creates Commit objects from them
@@ -98,7 +99,7 @@ class Git:
         self._check_for_commits()
         return self._git_log_parser.extract_commits(
             self._run(
-                f"git log {revision_range} --pretty=raw"
+                ["log", revision_range, "--pretty=raw"]
             ).stdout
         )
 
@@ -119,7 +120,7 @@ class Git:
         :rtype: List[str]
         """
         branches = self._git_branch_parser.extract_branches(
-            self._run('git branch --all').stdout
+            self._run(["branch", "--all"]).stdout
         )
         if include is not None:
             branches = [x for x in branches if re.search(include, x)]
