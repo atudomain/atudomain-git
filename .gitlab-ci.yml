@@ -42,7 +42,7 @@ dist:
 docs:
   stage: docs
   script:
-      - make docs
+    - make docs
   artifacts:
     paths:
       - docs/build/html
