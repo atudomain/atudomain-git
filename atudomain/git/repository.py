@@ -124,6 +124,43 @@ class Git:
             branches = [x for x in branches if not re.search(exclude, x)]
         return branches
 
+    def add_files(
+            self,
+            files_expression: str
+    ):
+        self._run(["add", files_expression])
+
+    def commit(
+            self,
+            message: str
+    ):
+        self._run(["commit", "-m", message])
+
+    def pull(
+            self
+    ):
+        self._run(["pull"])
+
+    def push(
+            self,
+            remote="origin",
+            branch="",
+            set_upstream=False
+    ):
+        if branch:
+            command = ["push", remote, branch]
+        else:
+            command = ["push", remote]
+        if set_upstream:
+            command.append("--set-upstream")
+        self._run(command)
+
+    def checkout(
+            self,
+            branch: str
+    ):
+        self._run(["checkout", branch])
+
 
 class NotARepositoryError(Exception):
     pass
