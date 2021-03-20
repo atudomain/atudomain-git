@@ -1,4 +1,4 @@
-# Simple Python GIT Library for Linux
+# Simple Python wrapper for Git
 [![pipeline](https://gitlab.com/atudomain/atudomain-git/badges/master/pipeline.svg)](https://gitlab.com/atudomain/atudomain-git/-/tree/master)
 [![Documentation Status](https://readthedocs.org/projects/atudomain-git/badge/?version=latest)](https://atudomain-git.readthedocs.io/en/latest/?badge=latest)
 
@@ -6,7 +6,6 @@ Provides access to Commit objects and easy branch listing.
 
 - License: 3-Clause BSD
 - Python: Python 3.6+
-- Platforms: Linux
 
 ## Table of Contents
 - [Installation](#installation)
@@ -14,7 +13,6 @@ Provides access to Commit objects and easy branch listing.
     - [Getting Branches](#getting-branches)
     - [Getting Commits](#getting-commits)
     - [Getting Commit details](#getting-commit-details)
-    - [Executing commands in repository](#executing-commands-in-repository)
 - [API Documentation](#api-documentation)
 
 ## Installation
