@@ -26,7 +26,7 @@ def remove_repo():
 
 
 def add_commits():
-    subprocess.run(f"git echo 'test' > testfile", shell=True, cwd=repo_dir)
+    subprocess.run(f"echo 'test' > testfile", shell=True, cwd=repo_dir)
     subprocess.run(f"git add .", shell=True, cwd=repo_dir)
     subprocess.run(f"git config user.name Test Example", shell=True, cwd=repo_dir)
     subprocess.run(f"git config user.email test@example.com", shell=True, cwd=repo_dir)
@@ -55,6 +55,14 @@ def git_with_commits():
     remove_repo()
 
 
+@pytest.fixture
+def git_with_origin():
+    create_repo()
+    add_commits()
+    yield Git(repo_dir)
+    remove_repo()
+
+
 def test_empty_repo(git):
     with pytest.raises(NoCommitsError):
         git.get_commits()
@@ -70,3 +78,11 @@ def test_empty_bare_repo(git_bare):
 def test_repo(git_with_commits):
     git_with_commits.get_commits()
     git_with_commits.get_branches()
+
+
+def test_create_commit_and_get_commits(git):
+    subprocess.run(f"echo 'test create' > test_create.txt", shell=True, cwd=repo_dir)
+    git.add_files("test_create.txt")
+    git.commit("test create")
+    assert "test create" in git.get_commits("HEAD")[0].message
+

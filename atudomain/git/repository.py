@@ -126,9 +126,9 @@ class Git:
 
     def add_files(
             self,
-            files_expression: str
+            pathspec: str
     ):
-        self._run(["add", files_expression])
+        self._run(["add", pathspec])
 
     def commit(
             self,
