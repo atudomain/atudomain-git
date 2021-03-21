@@ -96,6 +96,8 @@ def test_repo(git_with_commits):
 
 def test_create_commit_and_get_commits(git):
     subprocess.run(f"echo 'test create' > test_create.txt", shell=True, cwd=repo_dir)
+    git.config("user.name", "Test Example")
+    git.config("user.email", "test@example.com")
     git.add_files("test_create.txt")
     git.commit("test create")
     assert "test create" in git.get_commits("HEAD")[0].message

@@ -161,6 +161,13 @@ class Git:
     ):
         self._run(["checkout", branch])
 
+    def config(
+            self,
+            name: str,
+            value: str
+    ):
+        self._run(["config", name, value])
+
 
 class NotARepositoryError(Exception):
     pass
