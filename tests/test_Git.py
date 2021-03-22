@@ -20,6 +20,8 @@ def create_repo(is_bare=False):
         subprocess.run(f"git init {repo_dir} --bare", shell=True)
     else:
         subprocess.run(f"git init {repo_dir}", shell=True)
+        subprocess.run(f"git config user.name Test Example", shell=True, cwd=repo_dir)
+        subprocess.run(f"git config user.email test@example.com", shell=True, cwd=repo_dir)
 
 
 def clone_repo():
@@ -27,6 +29,8 @@ def clone_repo():
         shutil.rmtree(f"{clone_repo_dir}")
     else:
         subprocess.run(f"git clone {repo_dir} {clone_repo_dir}", shell=True)
+        subprocess.run(f"git config user.name Test Example", shell=True, cwd=clone_repo_dir)
+        subprocess.run(f"git config user.email test@example.com", shell=True, cwd=clone_repo_dir)
 
 
 def remove_repo():
@@ -40,8 +44,6 @@ def remove_clone():
 def add_commits():
     subprocess.run(f"echo 'test' > testfile", shell=True, cwd=repo_dir)
     subprocess.run(f"git add .", shell=True, cwd=repo_dir)
-    subprocess.run(f"git config user.name Test Example", shell=True, cwd=repo_dir)
-    subprocess.run(f"git config user.email test@example.com", shell=True, cwd=repo_dir)
     subprocess.run(f"git commit -m 'test'", shell=True, cwd=repo_dir)
 
 
@@ -69,7 +71,7 @@ def git_with_commits():
 
 @pytest.fixture
 def git_with_origin():
-    create_repo()
+    create_repo(is_bare=True)
     clone_repo()
     add_commits()
     yield Git(clone_repo_dir)
@@ -96,12 +98,14 @@ def test_repo(git_with_commits):
 
 def test_create_commit_and_get_commits(git):
     subprocess.run(f"echo 'test create' > test_create.txt", shell=True, cwd=repo_dir)
-    git.config("user.name", "Test Example")
-    git.config("user.email", "test@example.com")
     git.add_files("test_create.txt")
     git.commit("test create")
     assert "test create" in git.get_commits("HEAD")[0].message
 
 
-def test_pull(git_with_origin):
+def test_push_and_pull(git_with_origin):
+    subprocess.run(f"echo 'test create' > test_create.txt", shell=True, cwd=clone_repo_dir)
+    git_with_origin.add_files("test_create.txt")
+    git_with_origin.commit("test create")
+    git_with_origin.push()
     git_with_origin.pull()
