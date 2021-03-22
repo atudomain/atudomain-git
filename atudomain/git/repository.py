@@ -157,9 +157,15 @@ class Git:
 
     def checkout(
             self,
+            target: str
+    ):
+        self._run(["checkout", target])
+
+    def checkout_new_branch(
+            self,
             branch: str
     ):
-        self._run(["checkout", branch])
+        self._run(["checkout", "-b", branch])
 
     def config(
             self,
