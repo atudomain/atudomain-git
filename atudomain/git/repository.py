@@ -128,17 +128,32 @@ class Git:
             self,
             pathspec: str
     ):
+        """
+        Adds files to stash.
+
+        :param pathspec: Git-add-compatible single-word expression.
+        :type pathspec: str
+        """
         self._run(["add", pathspec])
 
     def commit(
             self,
             message: str
     ):
+        """
+        Creates a commit in a non-interactive way.
+
+        :param message: Commit message.
+        :type message: str
+        """
         self._run(["commit", "-m", message])
 
     def pull(
             self
     ):
+        """
+        Equivalent of 'git pull' without arguments.
+        """
         self._run(["pull"])
 
     def push(
@@ -147,6 +162,16 @@ class Git:
             branch="",
             set_upstream=False
     ):
+        """
+        Pushes to specific branch in specific remote.
+
+        :param remote: Name of remote.
+        :type remote: str
+        :param branch: Name of branch.
+        :type branch: str
+        :param set_upstream: If specified branch should become upstream.
+        :type set_upstream: bool
+        """
         if branch:
             command = ["push", remote, branch]
         else:
@@ -159,12 +184,24 @@ class Git:
             self,
             target: str
     ):
+        """
+        Checkouts to specified target.
+
+        :param target: Branch, commit or other target.
+        :type target: str
+        """
         self._run(["checkout", target])
 
     def checkout_new_branch(
             self,
             branch: str
     ):
+        """
+        Creates new branch and checkouts to it.
+
+        :param branch: Name of branch.
+        :type branch: str
+        """
         self._run(["checkout", "-b", branch])
 
     def config(
@@ -172,6 +209,14 @@ class Git:
             name: str,
             value: str
     ):
+        """
+        Changes git config values in current repository.
+
+        :param name: Name of entry to change.
+        :type name: str
+        :param value: New value for entry.
+        :type value: str
+        """
         self._run(["config", name, value])
 
 
