@@ -11,6 +11,7 @@ from tests import SANDBOX_DIR
 os.makedirs(SANDBOX_DIR, exist_ok=True)
 repo_dir = os.path.join(SANDBOX_DIR, "repo")
 clone_repo_dir = os.path.join(SANDBOX_DIR, "clone_repo")
+test_file_content = "test create"
 
 
 def create_repo(is_bare=False):
@@ -97,15 +98,15 @@ def test_repo(git_with_commits):
 
 
 def test_create_commit_and_get_commits(git):
-    subprocess.run(f"echo 'test create' > test_create.txt", shell=True, cwd=repo_dir)
+    subprocess.run(f"echo '{test_file_content}' > test_create.txt", shell=True, cwd=repo_dir)
     git.add_files("test_create.txt")
-    git.commit("test create")
-    assert "test create" in git.get_commits("HEAD")[0].message
+    git.commit(test_file_content)
+    assert test_file_content in git.get_commits("HEAD")[0].message
 
 
 def test_push_and_pull(git_with_origin):
-    subprocess.run(f"echo 'test create' > test_create.txt", shell=True, cwd=clone_repo_dir)
+    subprocess.run(f"echo '{test_file_content}' > test_create.txt", shell=True, cwd=clone_repo_dir)
     git_with_origin.add_files("test_create.txt")
-    git_with_origin.commit("test create")
+    git_with_origin.commit(test_file_content)
     git_with_origin.push()
     git_with_origin.pull()
