@@ -165,20 +165,11 @@ class Commit:
 
     def __eq__(self, other) -> bool:
         if isinstance(other, self.__class__):
-            for attribute in [x for x in dir(self) if not x.startswith('__')]:
-                if not hasattr(other, attribute):
-                    return False
-                else:
-                    other_attr = getattr(other, attribute)
-                    self_attr = getattr(self, attribute)
-                    if not callable(self_attr):
-                        if callable(other_attr):
-                            return False
-                        if self_attr != other_attr:
-                            return False
-            return True
+            if self.commit_id == other.commit_id:
+                return True
+            return False
         else:
-            raise NotImplementedError()
+            return NotImplementedError()
 
     def __ne__(self, other) -> bool:
         return not self == other
